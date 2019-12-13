@@ -32,10 +32,10 @@ export default function makeBaseConfig({
   return {
     context: rootPath,
     entry: {
-      App: [`./${basePath}`],
+      App: [path.resolve(rootPath, basePath)],
     },
     output: {
-      path: path.join(rootPath, buildDir),
+      path: path.resolve(rootPath, buildDir),
       publicPath: WEBPACK_PUBLIC_HOST + WEBPACK_PUBLIC_PATH,
       filename: '[name]-[contenthash].js',
       chunkFilename: '[name]-[contenthash].chunk.js',
@@ -56,13 +56,13 @@ export default function makeBaseConfig({
         {
           test: /\.worker\.(t|j)s$/,
           use: [babelLoader, { loader: 'worker-loader', options: { inline: true } }],
-          include: [new RegExp(basePath), path.join(rootPath, 'stories'), /.storybook/, libraryInclude],
+          include: [new RegExp(basePath), path.resolve(rootPath, 'stories'), /.storybook/, libraryInclude],
           exclude: libraryExclude,
         },
         {
           test: /\.(t|j)sx?$/,
           use: ['thread-loader', babelLoader],
-          include: [new RegExp(basePath), path.join(rootPath, 'stories'), /.storybook/, libraryInclude],
+          include: [new RegExp(basePath), path.resolve(rootPath, 'stories'), /.storybook/, libraryInclude],
           exclude: libraryExclude,
         },
         {
@@ -95,8 +95,8 @@ export default function makeBaseConfig({
     },
     resolve: {
       modules: [
-        path.join(rootPath, basePath),
-        path.join(rootPath, basePath, 'style'),
+        path.resolve(rootPath, basePath),
+        path.resolve(rootPath, basePath, 'style'),
         'node_modules',
       ],
       extensions: ['.js', '.ts', '.tsx', '.scss', '.json'],

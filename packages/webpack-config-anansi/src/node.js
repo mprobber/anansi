@@ -15,7 +15,7 @@ export default function makeNodeConfig(baseConfig, { rootPath, serverDir }) {
     __filename: true,
   };
   config.externals = [nodeExternals()];
-  config.output.path = path.join(rootPath, serverDir);
+  config.output.path = path.resolve(rootPath, serverDir);
   config.output.filename = '[name].js';
   config.output.chunkFilename = '[name].chunk.js';
   delete config.output.globalObject;

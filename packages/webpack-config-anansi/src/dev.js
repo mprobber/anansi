@@ -34,7 +34,7 @@ export default function makeDevConfig(
 
   config.plugins = [
     new webpack.HotModuleReplacementPlugin(),
-    new WatchMissingNodeModulesPlugin(path.join(rootPath, 'node_modules')),
+    new WatchMissingNodeModulesPlugin(path.resolve(rootPath, 'node_modules')),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.WatchIgnorePlugin([/s?css\.d\.ts$/]),
     ...config.plugins,
